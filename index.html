@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Richard Bordenave — Executive Coach &amp; Innovation Consultant</title>
+  <!-- Google Fonts (fallback) + variable fonts -->
+  <style>
+    /* ----- FONTS ----- */
+    @font-face {
+      font-family: 'Quick';
+      src: url('https://harisumer.me/project-2/Quick.ttf') format('truetype');
+      font-weight: 400 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Lora';
+      src: url('https://harisumer.me/project-2/Lora-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    /* ----- RESET & VARIABLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #19191a;
+      --paper: #f5f5f5;
+      --muted: #5b5255;
+      --slate: #899bb7;
+      --sand: #d4d3ca;
+      --line: rgba(25, 25, 26, .14);
+      --card: #eae8e2;
+      --accent: #899bb7;
+      --grad: linear-gradient(135deg, #d4d3ca, #899bb7);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --maxw: 1180px;
+      --display: 'Quick', 'Lora', serif;
+      --body: 'Lora', Georgia, serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--body);
+      color: var(--ink);
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    .logo,
+    .eyebrow,
+    .btn,
+    .num,
+    .faq-pill,
+    .award-badge {
+      font-family: var(--display);
+    }
+
+    /* ----- ANIMATIONS (global) ----- */
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: .7;
+      }
+      100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+
+    .animate-once {
+      animation: fadeSlideUp 0.6s ease forwards;
+    }
+
+    /* stagger children */
+    .stagger-children>* {
+      opacity: 0;
+      animation: fadeSlideUp 0.5s ease forwards;
+    }
+    .stagger-children>*:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+    .stagger-children>*:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    .stagger-children>*:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+    .stagger-children>*:nth-child(4) {
+      animation-delay: 0.2s;
+    }
+    .stagger-children>*:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+    /* ---------- NAV ---------- */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 245, 245, .86);
+      backdrop-filter: blur(10px);
+      
+    }
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo img {
+      height: 34px;
+      width: auto;
+    }
+    nav.links {
+      display: flex;
+      gap: 36px;
+      font-size: 14px;
+      color: var(--ink);
+      font-family: var(--body);
+    }
+    nav.links a {
+      opacity: .8;
+      transition: opacity .2s;
+    }
+    nav.links a:hover {
+      opacity: 1;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: var(--muted);
+    }
+    .btn.light {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn.light:hover {
+      background: #fff;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 80px 0 0;
+      position: relative;
+      overflow: hidden;
+      min-height: 640px;
+      background: radial-gradient(circle at 15% 20%, rgba(137, 155, 183, .18), transparent 55%),
+        var(--paper);
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 24px;
+      margin-top: 200px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      font-family: var(--display);
+    }
+    .badge .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--slate);
+      position: relative;
+      flex: none;
+    }
+    .badge .pulse::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--slate);
+      animation: pulse 1.8s infinite;
+    }
+    h1.headline {
+      font-size: 44px;
+      line-height: 1.14;
+      font-weight: 700;
+      letter-spacing: -.5px;
+      max-width: 520px;
+      margin: 0 0 22px;
+      color: var(--ink);
+    }
+    .hero-left .sub {
+      font-size: 14.5px;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 8px;
+    }
+    .hero-copy {
+      max-width: 300px;
+      justify-self: end;
+    }
+    .hero-copy p {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+    .hero-portrait {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 560px;
+      max-width: 80vw;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-portrait img {
+      width: 100%;
+      height: auto;
+      -webkit-mask-image: linear-gradient(to top, #000 62%, transparent 100%);
+      mask-image: linear-gradient(to top, #000 62%, transparent 100%);
+    }
+    @media (min-width: 900px) {
+      .hero-left {
+        grid-column: 1;
+      }
+      .hero-copy {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+
+    /* ---------- SECTION HEADERS ---------- */
+    .section {
+      padding: 100px 0;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+    h2.section-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -.3px;
+    }
+    .eyebrow {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* ---------- "WHAT I HEAR" ---------- */
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .work-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 260px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 26px;
+      background: linear-gradient(150deg, var(--muted), var(--ink));
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+    }
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    }
+    .work-card.alt {
+      background: linear-gradient(150deg, var(--slate), var(--muted));
+    }
+    .work-card h3 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      font-weight: 700;
+    }
+    .work-card p.q {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, .88);
+      margin: 0 0 14px;
+      font-style: italic;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 11.5px;
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .32);
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    /* ---------- "WHAT THEY SAY" ---------- */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .cred-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+    .cred-card p.quote {
+      margin: 0 0 20px;
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .cite {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .cite b {
+      color: var(--ink);
+      display: block;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .quote-card {
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .quote-mark {
+      font-size: 15px;
+      color: var(--slate);
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .quote-card p {
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin: 0 0 22px;
+      font-style: italic;
+    }
+    .quote-author .name {
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--display);
+    }
+    .quote-author .role {
+      font-size: 11.5px;
+      color: #bbb;
+    }
+    .stat-card {
+      background: var(--sand);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .stat-card p.quote {
+      margin: 0 0 20px;
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ---------- SERVICES ---------- */
+    .services-head {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .services-head h2 {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -.3px;
+      margin: 0;
+      max-width: 640px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .service-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #fff;
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(25, 25, 26, .08);
+    }
+    .service-card.featured {
+      background: var(--grad);
+      color: #19191a;
+      border-color: transparent;
+      box-shadow: 0 20px 40px rgba(137, 155, 183, .35);
+    }
+    .service-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .service-top h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .service-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      font-size: 14px;
+      flex: none;
+      font-family: var(--display);
+      color: var(--muted);
+    }
+    .service-card.featured .service-icon {
+      background: rgba(255, 255, 255, .4);
+      color: var(--ink);
+    }
+    .service-card p.desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .service-card.featured p.desc {
+      color: rgba(25, 25, 26, .75);
+    }
+    .service-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .service-tags .tag {
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .service-card.featured .service-tags .tag {
+      background: rgba(255, 255, 255, .4);
+      color: var(--ink);
+      border: 1px solid rgba(25, 25, 26, .15);
+    }
+
+    /* ---------- EXPERTISE (dark, cascading steps → ROW) ---------- */
+    .dark-section {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 50px;
+    }
+    .how-head {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    .how-head .eyebrow {
+      color: #9a9a9a;
+    }
+    .how-head h2 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.35;
+      max-width: 640px;
+      letter-spacing: -.3px;
+      margin: 0;
+      color: #fff;
+    }
+
+    /* --- STEPS ROW (modified) --- */
+    .steps-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .step {
+      flex: 1 1 180px;
+      min-width: 160px;
+      background: #232324;
+      border: 1px solid #333;
+      border-radius: var(--radius-lg);
+      padding: 26px 20px;
+      transition: transform 0.25s ease, background 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .step:hover {
+      transform: translateY(-6px);
+      background: #2a2a2b;
+      border-color: var(--slate);
+    }
+    .step .num {
+      font-size: 14px;
+      color: #ccc;
+      background: #333;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-weight: 700;
+      flex: none;
+    }
+    .step h4 {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: #fff;
+      font-family: var(--display);
+    }
+    .step p {
+      font-size: 13px;
+      color: #aaa;
+      margin: 0;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* ---------- FAQ / METHOD ---------- */
+    .faq-section {
+      background: var(--paper);
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .faq-left h2 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -.3px;
+      margin: 0 0 16px;
+      max-width: 440px;
+    }
+    .faq-left p.intro {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 0 0 26px;
+      max-width: 440px;
+    }
+    .faq-card {
+      background: var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 8px;
+      color: #fff;
+    }
+    .faq-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin: 10px 0 6px 10px;
+      font-family: var(--display);
+    }
+    .faq-item {
+      border-top: 1px solid #2c2c2d;
+    }
+    .faq-item:first-of-type {
+      border-top: none;
+    }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .faq-q .icon {
+      font-size: 16px;
+      color: #999;
+      transition: transform .25s;
+      flex: none;
+      margin-left: 12px;
+    }
+    .faq-item.open .faq-q .icon {
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+      padding: 0 18px;
+      font-size: 13px;
+      color: #b3b3b3;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a {
+      max-height: 220px;
+      padding-bottom: 16px;
+    }
+
+    /* ---------- CTA ---------- */
+    .cta-section {
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-orb {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      border-radius: 50%;
+      background: var(--grad);
+      box-shadow: 0 0 80px 20px rgba(137, 155, 183, .3);
+    }
+    .cta-section .eyebrow {
+      color: #9a9a9a;
+      letter-spacing: 2px;
+    }
+    .cta-section h2 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      margin: 0 0 22px;
+    }
+    .cta-section p {
+      max-width: 560px;
+      margin: 0 auto 14px;
+      color: #c9c9c9;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+    .cta-section .tagline {
+      font-family: var(--display);
+      color: #fff;
+      font-size: 15px;
+      margin: 0 0 30px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--ink);
+      color: #fff;
+      padding: 70px 0 26px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 70px;
+    }
+    .footer-col h6 {
+      font-size: 12px;
+      color: #8f8f8f;
+      font-weight: 600;
+      margin: 0 0 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: var(--display);
+    }
+    .footer-col a {
+      display: block;
+      font-size: 13.5px;
+      color: #ddd;
+      margin-bottom: 12px;
+      opacity: .85;
+    }
+    .footer-col a:hover {
+      opacity: 1;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #2c2c2d;
+      padding-top: 22px;
+      font-size: 12.5px;
+      color: #8f8f8f;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-copy {
+        text-align: left;
+        justify-self: start;
+        max-width: 100%;
+      }
+      h1.headline {
+        max-width: 100%;
+        font-size: 32px;
+      }
+      .hero {
+        min-height: auto;
+        padding-bottom: 260px;
+      }
+      .hero-portrait {
+        width: 340px;
+      }
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+      .cred-grid {
+        grid-template-columns: 1fr;
+      }
+      .services-head {
+        grid-template-columns: 1fr;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .how-head {
+        grid-template-columns: 1fr;
+      }
+      .steps-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .step {
+        flex: 1 1 auto;
+      }
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      nav.links {
+        display: none;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo"><img src="https://harisumer.me/project-2/logo.png" alt="Richard Bordenave"></div>
+      <nav class="links">
+        <a href="#hear">Approach</a>
+        <a href="#method">Method</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="btn">Book a Call</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-left animate-once">
+        <div class="badge"><span class="pulse"></span> Section 01 · Approach</div>
+        <h1 class="headline">Hold your course through the acceleration of change</h1>
+        <p class="sub">Today, uncertainty is no longer just technological, economic, or geopolitical. It challenges business models, professions, organizations… and often even meaning, identity, and the very way we lead.</p>
+      </div>
+      <div class="hero-copy animate-once" style="animation-delay:0.2s;">
+        <p>The greater the responsibilities and the more complex the stakes, the harder it becomes to find a protected space to replenish your inspiration and adjust your course.</p>
+        <button class="btn">Book a Call</button>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <img src="https://harisumer.me/project-2/men.png" alt="Richard Bordenave">
+    </div>
+  </section>
+
+  <section class="section" id="hear">
+    <div class="wrap">
+      <div class="section-head animate-once">
+        <div>
+          <div class="eyebrow">What I hear</div>
+          <h2 class="section-title">The tensions leaders bring into the room</h2>
+        </div>
+      </div>
+      <div class="works-grid stagger-children">
+        <div class="work-card">
+          <p class="q">"I'm stepping into a role on short notice, expected to succeed where my two predecessors failed."</p>
+          <h3>A role inherited from failure</h3>
+          <div class="tags"><span class="tag">New leadership</span></div>
+        </div>
+        <div class="work-card alt">
+          <p class="q">"We have to roll out AI at full speed, but my teams don't really understand why. They fear for their jobs — and I'm no longer sure who we should be hiring tomorrow."</p>
+          <h3>Fear behind the rollout</h3>
+          <div class="tags"><span class="tag">AI &amp; teams</span></div>
+        </div>
+        <div class="work-card alt">
+          <p class="q">"I spend so much time arbitrating short-term trade-offs that I can no longer look ahead, with my team, to where we are going."</p>
+          <h3>Trapped in the short term</h3>
+          <div class="tags"><span class="tag">Strategy</span></div>
+        </div>
+        <div class="work-card">
+          <p class="q">The greater the responsibilities and the more complex the stakes, the harder it becomes to find a protected space to replenish your inspiration.</p>
+          <h3>The real stakes</h3>
+          <div class="tags"><span class="tag">Approach</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head animate-once">
+        <div>
+          <div class="eyebrow">What they say</div>
+          <h2 class="section-title">Fresh eyes, real headway</h2>
+        </div>
+      </div>
+      <div class="cred-grid stagger-children">
+        <div class="cred-card">
+          <div>
+            <div class="award-badge">★ Client feedback</div>
+            <p class="quote">"I chose Richard for his industry knowledge; I discovered his emotional intelligence and his focus on results. His questions are formidable at unlocking a situation."</p>
+          </div>
+          <div class="cite"><b>R&amp;D Director</b>Food Industry — Paris</div>
+        </div>
+        <div class="quote-card">
+          <div class="quote-mark">"</div>
+          <p>In 3 weeks, we got a team moving that had feared the impact of technology choices on their jobs — by starting from practice, restoring meaning, and rediscovering opportunities.</p>
+          <div class="quote-author">
+            <div class="name">Head of Department</div>
+            <div class="role">Market Research — Paris</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="award-badge">★ Client feedback</div>
+            <p class="quote">In a complex economic situation that required choosing between radical options, our conversation brought out a third way — and an unexpected partnership that has since become reality.</p>
+          </div>
+          <div class="cite"><b>Design Office Director</b>Singapore</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="wrap">
+      <div class="services-head animate-once">
+        <div class="eyebrow">How we work together</div>
+        <h2>A clear, committed process — <b>from the first conversation to measurable results</b></h2>
+      </div>
+      <div class="services-grid stagger-children">
+        <div class="service-card">
+          <div class="service-top"><h3>Exploratory meeting</h3><div class="service-icon">01</div></div>
+          <p class="desc">A first one-hour conversation to understand your situation in detail, and clarify the framework and terms of the coaching. What is your situation? What have you already tried? What would you like to achieve? What experience do you have with coaching?</p>
+          <div class="service-tags"><span class="tag">1 hour</span><span class="tag">Video or in person</span></div>
+        </div>
+        <div class="service-card featured">
+          <div class="service-top"><h3>Agreement</h3><div class="service-icon">02</div></div>
+          <p class="desc">Together we define the objectives and the success criteria. I commit to the method and the quality of the process, to reach your goals within a limited number of sessions.</p>
+          <div class="service-tags"><span class="tag">Objectives</span><span class="tag">Success criteria</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-top"><h3>The journeys</h3><div class="service-icon">03</div></div>
+          <p class="desc">Individual: 8 one-hour sessions, in person, by video — or walking! Over 4 to 6 months, at the pace that suits you. Group: custom-designed workshops, seminars, co-development, keynotes for your team or organization.</p>
+          <div class="service-tags"><span class="tag">Individual</span><span class="tag">Group</span><span class="tag">Custom</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DARK SECTION with STEPS ROW (modified) -->
+  <section class="section dark-section">
+    <div class="wrap">
+      <div class="how-head animate-once">
+        <div class="eyebrow">Section 02 · Expertise</div>
+        <h2>A unique experience at your service — <b>20 years supporting leaders through transformation</b></h2>
+      </div>
+      <div class="steps-row stagger-children">
+        <div class="step">
+          <div class="num">20y</div>
+          <h4>Twenty years in transformation</h4>
+          <p>Supporting dozens of companies in their innovation and transformation efforts: growth projects, technology foresight, mergers &amp; acquisitions.</p>
+        </div>
+        <div class="step">
+          <div class="num">10y</div>
+          <h4>A decade in leadership</h4>
+          <p>Ten years on management and executive committees, then international consulting — including five years in Asia.</p>
+        </div>
+        <div class="step">
+          <div class="num">01</div>
+          <h4>Conviction — Reinvention</h4>
+          <p>Real transformations only take hold when decision-makers reinvent the way they think, decide, and act.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h4>Conviction — Shared purpose</h4>
+          <p>Coaching and innovation pursue the same goal — enabling people to bring forth an innovative answer and get back into action, in the face of tension or uncertainty.</p>
+        </div>
+        <div class="step">
+          <div class="num">✓</div>
+          <h4>Certified &amp; trained</h4>
+          <p>Trained in Creative Problem Solving (Crea-France), Decision Sciences (BVA Nudge Unit), Collective Intelligence and AI deployment (Ipsos Strategy3), systemic coaching at LACT (Palo Alto School), and certified as a Professional Coach at the École des Psychologues Praticiens in Paris — aligned with ICF standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="wrap faq-grid">
+      <div class="faq-left animate-once">
+        <div class="eyebrow">The method</div>
+        <h2>Fresh eyes, <b>real headway</b></h2>
+        <p class="intro">Executive coach and Innovation consultant, I support leaders and entrepreneurs through their reinventions: stepping into a new role, career shifts, strategic pivots, AI-driven transformation…</p>
+        <button class="btn">Book a Call</button>
+      </div>
+      <div class="faq-card animate-once" style="animation-delay:0.2s;">
+        <div class="faq-pill">💬 My approach</div>
+        <div class="faq-item open">
+          <div class="faq-q"><span>What does your approach combine?</span><span class="icon">+</span></div>
+          <div class="faq-a">My approach combines Coaching and Innovation by exploring their 3 shared levers, so that we turn moments of uncertainty into a dynamic of reinvention.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>The potential of the situation</span><span class="icon">+</span></div>
+          <div class="faq-a">Broaden your options, build on favorable dynamics.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>The uniqueness of each person</span><span class="icon">+</span></div>
+          <div class="faq-a">Find resources in the uniqueness of your journey.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Relational dynamics</span><span class="icon">+</span></div>
+          <div class="faq-a">Shift what flows between you and others.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Individual journey</span><span class="icon">+</span></div>
+          <div class="faq-a">One-on-one, 8 one-hour sessions, in person, by video — or walking! Over 4 to 6 months, at the pace that suits you.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Group journeys</span><span class="icon">+</span></div>
+          <div class="faq-a">For your team or organization — custom-designed workshops, seminars, co-development, and keynotes, with duration and pace defined together based on your goals.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <div class="wrap">
+      <div class="cta-orb"></div>
+      <div class="eyebrow">Elevator pitch · Contact — the essentials in 30 seconds</div>
+      <h2>In a <b>nutshell</b></h2>
+      <p>Executive coach and Innovation consultant, I support leaders and entrepreneurs through their reinventions. We explore three dimensions common to coaching and innovation: the potential of the situation, the uniqueness of each person, and relational dynamics. It is at their intersection that new answers emerge — answers that are truly yours.</p>
+      <div class="tagline">Fresh eyes, real headway.</div>
+      <button class="btn light">Book a 30-minute conversation</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo"><img src="https://harisumer.me/project-2/logo.png" alt="Richard Bordenave" style="filter:invert(1) brightness(2);"></div>
+        </div>
+        <div class="footer-col">
+          <h6>Navigation</h6>
+          <a href="#hear">Approach</a>
+          <a href="#method">Method</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h6>Connect</h6>
+          <a href="mailto:contact@richard-bordenave.com">contact@richard-bordenave.com</a>
+          <a href="https://linkedin.com/in/richardbordenave">linkedin.com/in/richardbordenave</a>
+          <a href="#">Calendly · exploratory meeting</a>
+        </div>
+        <div class="footer-col">
+          <h6>Legal</h6>
+          <a href="#">Legal notice</a>
+          <a href="#">ICF Code of Ethics</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© Richard Bordenave — Coaching &amp; Innovation</span>
+        <span>Legal notice · ICF Code of Ethics</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ toggle
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-q').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // (optional) additional animation trigger for elements in viewport – but we use CSS animation classes.
+    console.log('Animations active: .animate-once, .stagger-children');
+  </script>
+</body>
+</html>
