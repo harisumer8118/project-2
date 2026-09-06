@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book Your Installation - Demo</title>
+<style>
+  body { font-family: Arial, sans-serif; background:#eef1f6; padding:60px 20px; text-align:center; }
+  .demo-btn {
+    background:#1355d6; color:#fff; padding:14px 32px; border:none;
+    border-radius:10px; font-weight:600; font-size:16px; cursor:pointer;
+  }
+  .copy-btn {
+    background:#0a2540; color:#fff; padding:12px 26px; border:none;
+    border-radius:10px; font-weight:600; font-size:15px; cursor:pointer;
+    margin-bottom: 20px;
+  }
+  .copy-btn.copied { background:#1a9e5c; }
+  .demo-toolbar { margin-bottom: 30px; }
+
+  /* ============================================= */
+  /* PASTE EVERYTHING BELOW INTO WEBFLOW            */
+  /* ============================================= */
+  .quote-model {
+    display: none !important;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 37, 64, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 99999;
+    overflow-y: auto;
+    padding: 40px 20px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .quote-model.is-visible { display: flex !important; }
+
+  .quote-model .div-block-13 {
+    background: #ffffff;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 900px;
+    padding: 28px 32px 32px 32px;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    margin: auto;
+  }
+
+  .quote-model .image-30 {
+    cursor: pointer;
+    position: absolute;
+    top: 18px; right: 20px;
+    width: 22px; height: 22px;
+    z-index: 10;
+  }
+
+  .quote-model h3.popup-title {
+    text-align: center;
+    margin: 0 0 24px 0;
+    color: #0a2540;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* ---- System / plan selection cards ---- */
+  .quote-model .quick-stack-3 {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .quote-model .quick-stack-3 > div { flex: 1; min-width: 260px; }
+
+  .quote-model .cell-19 {
+    cursor: pointer;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: all 0.25s ease;
+    background: #f7f9fc;
+    position: relative;
+  }
+  .quote-model .cell-19:hover { border-color:#1355d6; }
+  .quote-model .cell-19.selected {
+    border-color: #1355d6;
+    background: #ffffff;
+  }
+
+  .quote-model .cell-badge {
+    display: inline-block;
+    background: #1355d6;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  .quote-model .cell-title {
+    font-weight: 700;
+    color: #0a2540;
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .quote-model .cell-price {
+    font-weight: 700;
+    color: #0a2540;
+    font-size: 22px;
+  }
+
+  /* ---- Faucet add-on cards ---- */
+  .quote-model .quick-stack-10 {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .quote-model .quick-stack-10 > div { flex: 1; min-width: 180px; }
+
+  .quote-model .quick-stack-10 .cell-19 {
+    padding: 18px 16px;
+  }
+  .quote-model .quick-stack-10 .cell-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  /* ---- Form ---- */
+  .quote-model .form-field-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .quote-model .form-field-wrapper > div { flex: 1; min-width: 220px; }
+
+  .quote-model .form-label-2 {
+    font-weight: 600;
+    font-size: 13px;
+    color: #0a2540;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .quote-model .form-field {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d9e6;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fafbfc;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .quote-model .form-field:focus {
+    border-color: #1355d6;
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(19,85,214,0.15);
+  }
+  .quote-model textarea.form-field {
+    resize: vertical;
+    min-height: 70px;
+  }
+
+  .quote-model .primary-button {
+    background: #1355d6;
+    color: #fff;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .quote-model .primary-button:hover { background: #0d3fa8; }
+
+  @media (max-width: 767px) {
+    .quote-model .div-block-13 { padding: 24px 16px !important; margin: 10px !important; }
+    .quote-model .quick-stack-3,
+    .quote-model .quick-stack-10,
+    .quote-model .form-field-wrapper {
+      flex-direction: column !important;
+      gap: 14px !important;
+    }
+    .quote-model .quick-stack-3 > div,
+    .quote-model .quick-stack-10 > div,
+    .quote-model .form-field-wrapper > div {
+      min-width: 100% !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== DEMO TOOLBAR ===== -->
+<div class="demo-toolbar">
+  <button class="copy-btn" id="copyCodeBtn">📋 Copy Popup Code</button>
+</div>
+
+<!-- ===== DEMO TRIGGER BUTTON (already exists on your real site) ===== -->
+<button class="demo-btn book-now-trigger">Book Now</button>
+
+<!-- Hidden template: exact text that gets copied to your clipboard -->
+<template id="embedTemplate">
+&lt;style&gt;
+  .quote-model {
+    display: none !important;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 37, 64, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 99999;
+    overflow-y: auto;
+    padding: 40px 20px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .quote-model.is-visible { display: flex !important; }
+
+  .quote-model .div-block-13 {
+    background: #ffffff;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 900px;
+    padding: 28px 32px 32px 32px;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    margin: auto;
+  }
+
+  .quote-model .image-30 {
+    cursor: pointer;
+    position: absolute;
+    top: 18px; right: 20px;
+    width: 22px; height: 22px;
+    z-index: 10;
+  }
+
+  .quote-model h3.popup-title {
+    text-align: center;
+    margin: 0 0 24px 0;
+    color: #0a2540;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .quote-model .quick-stack-3 {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .quote-model .quick-stack-3 > div { flex: 1; min-width: 260px; }
+
+  .quote-model .cell-19 {
+    cursor: pointer;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: all 0.25s ease;
+    background: #f7f9fc;
+    position: relative;
+  }
+  .quote-model .cell-19:hover { border-color:#1355d6; }
+  .quote-model .cell-19.selected {
+    border-color: #1355d6;
+    background: #ffffff;
+  }
+
+  .quote-model .cell-badge {
+    display: inline-block;
+    background: #1355d6;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  .quote-model .cell-title {
+    font-weight: 700;
+    color: #0a2540;
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .quote-model .cell-price {
+    font-weight: 700;
+    color: #0a2540;
+    font-size: 22px;
+  }
+
+  .quote-model .quick-stack-10 {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .quote-model .quick-stack-10 > div { flex: 1; min-width: 180px; }
+
+  .quote-model .quick-stack-10 .cell-19 {
+    padding: 18px 16px;
+  }
+  .quote-model .quick-stack-10 .cell-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .quote-model .form-field-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .quote-model .form-field-wrapper > div { flex: 1; min-width: 220px; }
+
+  .quote-model .form-label-2 {
+    font-weight: 600;
+    font-size: 13px;
+    color: #0a2540;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .quote-model .form-field {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d9e6;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fafbfc;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .quote-model .form-field:focus {
+    border-color: #1355d6;
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(19,85,214,0.15);
+  }
+  .quote-model textarea.form-field {
+    resize: vertical;
+    min-height: 70px;
+  }
+
+  .quote-model .primary-button {
+    background: #1355d6;
+    color: #fff;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .quote-model .primary-button:hover { background: #0d3fa8; }
+
+  @media (max-width: 767px) {
+    .quote-model .div-block-13 { padding: 24px 16px !important; margin: 10px !important; }
+    .quote-model .quick-stack-3,
+    .quote-model .quick-stack-10,
+    .quote-model .form-field-wrapper {
+      flex-direction: column !important;
+      gap: 14px !important;
+    }
+    .quote-model .quick-stack-3 > div,
+    .quote-model .quick-stack-10 > div,
+    .quote-model .form-field-wrapper > div {
+      min-width: 100% !important;
+    }
+  }
+&lt;/style&gt;
+
+&lt;div class="quote-model"&gt;
+  &lt;div class="div-block-13"&gt;
+
+    &lt;svg class="image-30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+      &lt;path d="M18 6L6 18M6 6l12 12" stroke="#0a2540" stroke-width="2" stroke-linecap="round"/&gt;
+    &lt;/svg&gt;
+
+    &lt;h3 class="popup-title"&gt;Book your installation&lt;/h3&gt;
+
+    &lt;div class="quick-stack-3"&gt;
+      &lt;div&gt;
+        &lt;div class="cell-19"&gt;
+          &lt;span class="cell-badge"&gt;Best Value&lt;/span&gt;
+          &lt;div class="cell-title"&gt;5 Stage RO System&lt;/div&gt;
+          &lt;div class="cell-price"&gt;$599&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class="cell-19 selected"&gt;
+          &lt;span class="cell-badge"&gt;Most Popular&lt;/span&gt;
+          &lt;div class="cell-title"&gt;7 stage RO Alkaline&lt;/div&gt;
+          &lt;div class="cell-price"&gt;$799&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="quick-stack-10"&gt;
+      &lt;div&gt;
+        &lt;div class="cell-19"&gt;
+          &lt;div class="cell-title"&gt;Free (faucet)&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class="cell-19"&gt;
+          &lt;div class="cell-title"&gt;+$49 (faucet)&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class="cell-19"&gt;
+          &lt;div class="cell-title"&gt;+$69 (faucet)&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;form id="quoteForm"&gt;
+      &lt;div class="form-field-wrapper"&gt;
+        &lt;div&gt;
+          &lt;label class="form-label-2"&gt;Full name&lt;/label&gt;
+          &lt;input class="form-field" type="text" name="name" required&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;label class="form-label-2"&gt;Email Address&lt;/label&gt;
+          &lt;input class="form-field" type="email" name="email" required&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="form-field-wrapper"&gt;
+        &lt;div&gt;
+          &lt;label class="form-label-2"&gt;Phone Number&lt;/label&gt;
+          &lt;input class="form-field" type="tel" name="phone" required&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;label class="form-label-2"&gt;Suburb&lt;/label&gt;
+          &lt;input class="form-field" type="text" name="suburb"&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class="form-field-wrapper"&gt;
+        &lt;div style="min-width:100%;"&gt;
+          &lt;label class="form-label-2"&gt;Notes&lt;/label&gt;
+          &lt;textarea class="form-field" name="notes" placeholder="Example Text"&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;button type="submit" class="primary-button"&gt;SUBMIT&lt;/button&gt;
+    &lt;/form&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+</template>
+
+<!-- ============================================= -->
+<!-- PASTE THIS ENTIRE BLOCK INTO A WEBFLOW EMBED   -->
+<!-- ============================================= -->
+<div class="quote-model">
+  <div class="div-block-13">
+
+    <svg class="image-30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18M6 6l12 12" stroke="#0a2540" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+    <h3 class="popup-title">Book your installation</h3>
+
+    <!-- System selection -->
+    <div class="quick-stack-3">
+      <div>
+        <div class="cell-19">
+          <span class="cell-badge">Best Value</span>
+          <div class="cell-title">5 Stage RO System</div>
+          <div class="cell-price">$599</div>
+        </div>
+      </div>
+      <div>
+        <div class="cell-19 selected">
+          <span class="cell-badge">Most Popular</span>
+          <div class="cell-title">7 stage RO Alkaline</div>
+          <div class="cell-price">$799</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Faucet add-on selection -->
+    <div class="quick-stack-10">
+      <div>
+        <div class="cell-19">
+          <div class="cell-title">Free (faucet)</div>
+        </div>
+      </div>
+      <div>
+        <div class="cell-19">
+          <div class="cell-title">+$49 (faucet)</div>
+        </div>
+      </div>
+      <div>
+        <div class="cell-19">
+          <div class="cell-title">+$69 (faucet)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="quoteForm">
+      <div class="form-field-wrapper">
+        <div>
+          <label class="form-label-2">Full name</label>
+          <input class="form-field" type="text" name="name" required>
+        </div>
+        <div>
+          <label class="form-label-2">Email Address</label>
+          <input class="form-field" type="email" name="email" required>
+        </div>
+      </div>
+
+      <div class="form-field-wrapper">
+        <div>
+          <label class="form-label-2">Phone Number</label>
+          <input class="form-field" type="tel" name="phone" required>
+        </div>
+        <div>
+          <label class="form-label-2">Suburb</label>
+          <input class="form-field" type="text" name="suburb">
+        </div>
+      </div>
+
+      <div class="form-field-wrapper">
+        <div style="min-width:100%;">
+          <label class="form-label-2">Notes</label>
+          <textarea class="form-field" name="notes" placeholder="Example Text"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="primary-button">SUBMIT</button>
+    </form>
+
+  </div>
+</div>
+<!-- ===== END OF EMBED BLOCK ===== -->
+
+<script>
+  // Your existing script.js already handles this (initPopup, initOptionSelection,
+  // initPopupHide) targeting the same classes. This is only for the standalone demo.
+  document.addEventListener('DOMContentLoaded', function () {
+    // Copy-to-clipboard button
+    const copyBtn = document.getElementById('copyCodeBtn');
+    const template = document.getElementById('embedTemplate');
+    copyBtn.addEventListener('click', function () {
+      const code = template.innerHTML.trim();
+      navigator.clipboard.writeText(code).then(function () {
+        copyBtn.textContent = '✅ Copied! Paste into your Webflow Embed';
+        copyBtn.classList.add('copied');
+        setTimeout(function () {
+          copyBtn.textContent = '📋 Copy Popup Code';
+          copyBtn.classList.remove('copied');
+        }, 2500);
+      }).catch(function () {
+        alert('Could not copy automatically — please select the code manually.');
+      });
+    });
+
+    const popup = document.querySelector('.quote-model');
+    const closeBtn = document.querySelector('.quote-model .image-30');
+    const openBtns = document.querySelectorAll('.book-now-trigger');
+
+    function open(e){ e.preventDefault(); popup.classList.add('is-visible'); document.body.style.overflow='hidden'; }
+    function close(e){ if(e) e.preventDefault(); popup.classList.remove('is-visible'); document.body.style.overflow=''; }
+
+    openBtns.forEach(b => b.addEventListener('click', open));
+    closeBtn.addEventListener('click', close);
+    popup.addEventListener('click', e => { if (e.target === popup) close(e); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(e); });
+
+    // Selection within each group (system cards vs faucet cards) independently
+    document.querySelectorAll('.quick-stack-3, .quick-stack-10').forEach(group => {
+      group.querySelectorAll('.cell-19').forEach(cell => {
+        cell.addEventListener('click', function () {
+          group.querySelectorAll('.cell-19').forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+    });
+
+    document.getElementById('quoteForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Form submitted! (Wire this up to Webflow\'s native form or your backend.)');
+      close();
+    });
+  });
+</script>
+
+</body>
+</html>
